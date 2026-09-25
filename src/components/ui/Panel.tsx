@@ -7,8 +7,7 @@ interface PanelProps extends PropsWithChildren {
   className?: string;
 }
 
-export function Panel({ title, subtitle, action, className = '', children }: PanelProps) {
-  return (
+export const Panel = ({ title, subtitle, action, className = '', children }: PanelProps) => (
     <section className={`rounded-2xl border border-slate-200 bg-white shadow-panel ${className}`}>
       <header className="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4">
         <div>
@@ -20,4 +19,3 @@ export function Panel({ title, subtitle, action, className = '', children }: Pan
       <div className="p-4">{children}</div>
     </section>
   );
-}

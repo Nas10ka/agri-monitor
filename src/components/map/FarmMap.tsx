@@ -57,14 +57,13 @@ const ActiveFieldViewport = ({ field }: { field: FieldFeature }) => {
   return null;
 }
 
-export function FarmMap({
+export const FarmMap = ({
   activeField,
   points,
   onFieldSelect,
   onAddPointRequest,
   onInvalidPointRequest,
-}: FarmMapProps) {
-  return (
+}: FarmMapProps) => (
     <div className="h-[460px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-panel lg:h-[calc(100vh-8.5rem)] lg:min-h-[620px]">
       <MapContainer center={DEFAULT_MAP_CENTER} zoom={13} scrollWheelZoom className="h-full w-full">
         <TileLayer
@@ -117,4 +116,4 @@ export function FarmMap({
       </MapContainer>
     </div>
   );
-}
+

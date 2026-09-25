@@ -2,7 +2,7 @@ import { FIELDS } from '../../data/fields';
 import { useFarmStore } from '../../store/useFarmStore';
 import { Panel } from '../ui/Panel';
 
-export function FieldList() {
+export const FieldList = () => {
   const activeFieldId = useFarmStore((state) => state.activeFieldId);
   const setActiveField = useFarmStore((state) => state.setActiveField);
   const points = useFarmStore((state) => state.points);

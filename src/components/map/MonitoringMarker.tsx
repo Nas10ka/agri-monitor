@@ -8,7 +8,7 @@ interface MonitoringMarkerProps {
   point: MonitoringPoint;
 }
 
-function createMarkerIcon(point: MonitoringPoint) {
+const createMarkerIcon = (point: MonitoringPoint) => {
   const option = POINT_TYPE_OPTIONS.find((candidate) => candidate.value === point.type) ?? POINT_TYPE_OPTIONS[3];
 
   if (!option) {
@@ -23,7 +23,7 @@ function createMarkerIcon(point: MonitoringPoint) {
   });
 }
 
-export function MonitoringMarker({ point }: MonitoringMarkerProps) {
+export const MonitoringMarker = ({ point }: MonitoringMarkerProps) => {
   const type = POINT_TYPE_OPTIONS.find((option) => option.value === point.type);
 
   return (

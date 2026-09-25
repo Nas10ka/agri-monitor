@@ -1,9 +1,9 @@
 import type { MonitoringPoint, PointFilters } from './models';
 
-export function selectVisiblePoints(
+export const selectVisiblePoints = (
   points: readonly MonitoringPoint[],
   filters: PointFilters,
-): MonitoringPoint[] {
+): MonitoringPoint[] => {
   const normalizedSearch = filters.search.trim().toLocaleLowerCase('uk-UA');
 
   return [...points]

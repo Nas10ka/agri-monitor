@@ -13,7 +13,7 @@ const INITIAL_FILTERS: PointFiltersValue = {
   sortDirection: 'newest',
 };
 
-export function PointsPanel() {
+export const PointsPanel = () => {
   const points = useFarmStore((state) => state.points);
   const deletePoint = useFarmStore((state) => state.deletePoint);
   const [filters, setFilters] = useState<PointFiltersValue>(INITIAL_FILTERS);

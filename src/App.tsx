@@ -5,11 +5,11 @@ import { FarmMap } from './components/map/FarmMap';
 import { MonitoringPointForm } from './components/points/MonitoringPointForm';
 import { PointsPanel } from './components/points/PointsPanel';
 import { Panel } from './components/ui/Panel';
-import type { GeoPosition } from './domain/models';
+import type { GeoPosition, MonitoringPoint } from './domain/models';
 import { useActiveField } from './hooks/useActiveField';
 import { useFarmStore } from './store/useFarmStore';
 
-export default function App() {
+const App = () => {
   const activeField = useActiveField();
   const activeFieldId = useFarmStore((state) => state.activeFieldId);
   const points = useFarmStore((state) => state.points);
@@ -43,6 +43,16 @@ export default function App() {
     console.log('handleInvalidPointRequest ',notice)
   }
 
+  const handleDismissNotice = () => setNotice(null);
+
+  const handleCancelAddingNewPoint = () => setDraftPosition(null);
+
+  const handleSubmitNewPoint = (point: MonitoringPoint) => {
+    addPoint(point);
+    setDraftPosition(null);
+    setNotice('Моніторингову точку додано.');
+  }
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <header className="border-b border-slate-200 bg-white">
@@ -69,7 +79,7 @@ export default function App() {
           {notice ? (
             <div role="status" className="mb-3 flex items-center justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
               <span>{notice}</span>
-              <button type="button" onClick={() => setNotice(null)} className="font-semibold underline decoration-amber-400 underline-offset-2">Закрити</button>
+              <button type="button" onClick={handleDismissNotice} className="font-semibold underline decoration-amber-400 underline-offset-2">Закрити</button>
             </div>
           ) : null}
           <FarmMap
@@ -88,12 +98,8 @@ export default function App() {
               <MonitoringPointForm
                 fieldId={activeFieldId}
                 position={draftPosition}
-                onCancel={() => setDraftPosition(null)}
-                onSubmit={(point) => {
-                  addPoint(point);
-                  setDraftPosition(null);
-                  setNotice('Моніторингову точку додано.');
-                }}
+                onCancel={handleCancelAddingNewPoint}
+                onSubmit={handleSubmitNewPoint}
               />
             </Panel>
           ) : (
@@ -109,3 +115,5 @@ export default function App() {
     </main>
   );
 }
+
+export default App;

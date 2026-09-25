@@ -9,9 +9,11 @@ interface PointListItemProps {
   onDelete: (pointId: string) => void;
 }
 
-export function PointListItem({ point, onDelete }: PointListItemProps) {
+export const PointListItem = ({ point, onDelete }: PointListItemProps) =>  {
   const type = POINT_TYPE_OPTIONS.find((option) => option.value === point.type);
   const fieldName = FIELDS.find((field) => field.properties.id === point.fieldId)?.properties.name ?? point.fieldId;
+
+  const handlePointRemove = () => onDelete(point.id);
 
   return (
     <article className="rounded-xl border border-slate-200 p-3">
@@ -28,7 +30,7 @@ export function PointListItem({ point, onDelete }: PointListItemProps) {
         </div>
         <button
           type="button"
-          onClick={() => onDelete(point.id)}
+          onClick={handlePointRemove}
           className="rounded-lg px-2 py-1 text-xs font-semibold text-rose-600 transition hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-rose-300"
           aria-label={`Видалити точку ${type?.label ?? point.id}`}
         >

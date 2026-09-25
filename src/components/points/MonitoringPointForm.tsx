@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent } from 'react';
+import { useMemo, useState, type FormEvent, type ChangeEvent } from 'react';
 import { POINT_TYPE_OPTIONS } from '../../constants';
 import type { GeoPosition, MonitoringPoint, PointType } from '../../domain/models';
 import { formatCoordinate, toMgrs } from '../../services/coordinateService';
@@ -10,12 +10,16 @@ interface MonitoringPointFormProps {
   onCancel: () => void;
 }
 
-export function MonitoringPointForm({ fieldId, position, onSubmit, onCancel }: MonitoringPointFormProps) {
+export const MonitoringPointForm = ({ fieldId, position, onSubmit, onCancel }: MonitoringPointFormProps) => {
   const [type, setType] = useState<PointType>('soil');
   const [description, setDescription] = useState('');
   const mgrsValue = useMemo(() => toMgrs(position), [position]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => setType(event.target.value as PointType);
+
+  const handleDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => setDescription(event.target.value);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     onSubmit({
@@ -52,7 +56,7 @@ export function MonitoringPointForm({ fieldId, position, onSubmit, onCancel }: M
         <span className="mb-1.5 block text-xs font-semibold text-slate-700">Тип точки</span>
         <select
           value={type}
-          onChange={(event) => setType(event.target.value as PointType)}
+          onChange={handleTypeChange}
           className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
         >
           {POINT_TYPE_OPTIONS.map((option) => (
@@ -67,7 +71,7 @@ export function MonitoringPointForm({ fieldId, position, onSubmit, onCancel }: M
         <span className="mb-1.5 block text-xs font-semibold text-slate-700">Опис</span>
         <textarea
           value={description}
-          onChange={(event) => setDescription(event.target.value)}
+          onChange={handleDescriptionChange}
           maxLength={300}
           rows={3}
           placeholder="Необов'язково"

@@ -2,14 +2,14 @@ import type { FieldFeature, GeoPosition } from '../domain/models';
 
 const EPSILON = 1e-10;
 
-function isPointOnSegment(
+const isPointOnSegment = (
   x: number,
   y: number,
   startX: number,
   startY: number,
   endX: number,
   endY: number,
-): boolean {
+): boolean  => {
   const crossProduct = (y - startY) * (endX - startX) - (x - startX) * (endY - startY);
 
   if (Math.abs(crossProduct) > EPSILON) {
@@ -22,7 +22,7 @@ function isPointOnSegment(
   return withinLongitude && withinLatitude;
 }
 
-export function isPositionInsideField(position: GeoPosition, field: FieldFeature): boolean {
+export const isPositionInsideField = (position: GeoPosition, field: FieldFeature): boolean => {
   const ring = field.geometry.coordinates[0];
 
   if (!ring || ring.length < 4) {
@@ -60,7 +60,7 @@ export function isPositionInsideField(position: GeoPosition, field: FieldFeature
   return isInside;
 }
 
-export function toLeafletPositions(field: FieldFeature): [number, number][] {
+export const toLeafletPositions = (field: FieldFeature): [number, number][] => {
   const ring = field.geometry.coordinates[0] ?? [];
   return ring.map(([longitude, latitude]) => [latitude, longitude]);
 }

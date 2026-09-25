@@ -1,3 +1,4 @@
+import { type ChangeEvent } from 'react';
 import { POINT_TYPE_OPTIONS } from '../../constants';
 import type { PointFilters as PointFiltersValue, PointType, SortDirection } from '../../domain/models';
 
@@ -6,20 +7,27 @@ interface PointFiltersProps {
   onChange: (filters: PointFiltersValue) => void;
 }
 
-export function PointFilters({ value, onChange }: PointFiltersProps) {
+export const PointFilters = ({ value, onChange }: PointFiltersProps) => {
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => onChange({ ...value, search: event.target.value });
+
+  const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => onChange({ ...value, type: event.target.value as PointType | 'all' });
+
+  const handleDateChange = (event: ChangeEvent<HTMLSelectElement>) => onChange({ ...value, sortDirection: event.target.value as SortDirection });
+
   return (
     <div className="space-y-2">
       <input
         type="search"
         value={value.search}
-        onChange={(event) => onChange({ ...value, search: event.target.value })}
+        onChange={handleSearchChange}
         placeholder="Пошук за описом..."
         className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
       />
       <div className="grid grid-cols-2 gap-2">
         <select
           value={value.type}
-          onChange={(event) => onChange({ ...value, type: event.target.value as PointType | 'all' })}
+          onChange={handleTypeChange}
           aria-label="Фільтр за типом"
           className="min-w-0 rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
         >
@@ -30,7 +38,7 @@ export function PointFilters({ value, onChange }: PointFiltersProps) {
         </select>
         <select
           value={value.sortDirection}
-          onChange={(event) => onChange({ ...value, sortDirection: event.target.value as SortDirection })}
+          onChange={handleDateChange}
           aria-label="Сортування за датою"
           className="min-w-0 rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
         >

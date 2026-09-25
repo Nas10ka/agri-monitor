@@ -4,7 +4,7 @@ interface FieldDetailsProps {
   field: FieldFeature;
 }
 
-export function FieldDetails({ field }: FieldDetailsProps) {
+export const FieldDetails = ({ field }: FieldDetailsProps) => {
   const { name, area, crop } = field.properties;
 
   return (

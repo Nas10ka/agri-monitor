@@ -29,7 +29,6 @@ const MapClickHandler = ({ activeField, onAddPointRequest, onInvalidPointRequest
 
       if (!isPositionInsideField(position, activeField)) {
         onInvalidPointRequest();
-        console.log('test')
         return;
       }
 

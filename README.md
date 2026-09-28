@@ -126,23 +126,4 @@ Backend навмисно відсутній. Дані живуть у пам'я�
 - Панель управління показує всі створені точки; активне поле впливає на додавання точки та відображення точок на карті.
 - Видалення відбувається одразу, без confirmation modal, бо вимога підтвердження не задана.
 
-## Що б я додала з більшим часом
 
-- persistence через API або IndexedDB;
-- optimistic mutations + server error states;
-- confirmation/undo для видалення;
-- editing monitoring points;
-- accessibility audit і keyboard-first map alternatives;
-- lazy loading / clustering для великої кількості точок;
-- support MultiPolygon і GeoJSON FeatureCollection;
-- integration/e2e tests з React Testing Library + Playwright/Cypress;
-- schema validation для API/mock payloads;
-- custom map tiles/offline strategy для production agri use cases.
-
-## Як презентувати рішення за 30 хв
-
-1. **5–7 хв — demo:** вибір поля, додавання валідної точки, MGRS, різні типи маркерів, фільтр/пошук/сортування, видалення, приклад кліку поза полем.
-2. **10–15 хв — code tour:** `models.ts` -> store -> services -> map -> form -> selector/list.
-3. **10–15 хв — рішення:** пояснити Zustand, локальний vs глобальний state, point-in-polygon, GeoJSON `[lng, lat]` vs Leaflet `[lat, lng]`, stable keys, derived state.
-4. **Q&A:** згадати trade-offs і секцію "Що б я додала з більшим часом".
-# agri-monitor

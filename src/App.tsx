@@ -27,9 +27,7 @@ const App = () => {
   const handleFieldSelect = (fieldId: string) : void => {
     setActiveField(fieldId);
     setDraftPosition(null);
-    console.log('handleFieldSelect')
     setNotice(null);
-    console.log(notice)
   }
 
   const handleAddPointRequest = (position: GeoPosition): void => {
@@ -40,7 +38,6 @@ const App = () => {
   const handleInvalidPointRequest = (): void => {
     setDraftPosition(null);
     setNotice('Точку можна додати лише всередині активного поля.');
-    console.log('handleInvalidPointRequest ',notice)
   }
 
   const handleDismissNotice = () => setNotice(null);

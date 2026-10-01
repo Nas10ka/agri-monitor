@@ -102,7 +102,7 @@ const App = () => {
           ) : (
             <Panel title="Додавання точки" subtitle="Клікніть всередині активного поля на карті">
               <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm leading-6 text-slate-600">
-                Після кліку по активному полю тут з'явиться форма з WGS 84 координатами, MGRS, типом точки та описом.
+                Після кліку по активному полю тут з'явиться форма з координатами WGS 84, MGRS, типом точки та описом.
               </div>
             </Panel>
           )}

@@ -37,7 +37,7 @@ const App = () => {
 
   const handleInvalidPointRequest = (): void => {
     setDraftPosition(null);
-    setNotice('Точку можна додати лише всередині активного поля.');
+    // setNotice('Точку можна додати лише всередині активного поля.');
   }
 
   const handleDismissNotice = () => setNotice(null);
